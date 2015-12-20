@@ -1,6 +1,9 @@
 <% if notice %>
 <p id="notice"><%= notice %></p>
 <% end %>
+<% if @counter > 4 %>
+  <%= pluralize(@counter,'view') %>
+<% end %>
 <h1>Your Pragmatic Catalog</h1>
 <% cache ['store',Product.latest] do %>
   <% @products.each do |product|%>
