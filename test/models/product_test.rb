@@ -11,7 +11,7 @@ class ProductTest < ActiveSupport::TestCase
    assert(product.errors[:price].any?)
  end
   test 'product price must be positive' do
-    product = Product.new(title:"My Book Title", description:'hhhh',image_url:'7aga.png')
+    product = Product.new(title:"My Book Title", description:'hhhhhhhhhhh',image_url:'7aga.png')
     product.price = -1
     assert(product.invalid?)
     assert_equal(["must be greater than or equal to 0.01"],product.errors[:price])
@@ -22,7 +22,7 @@ class ProductTest < ActiveSupport::TestCase
     assert(product.valid?)
   end
 def new_product(img_url)
-  Product.new(title: "My Book Title", description: "yyy", price: 1, image_url: img_url)
+  Product.new(title: "My Book Title", description: "yyyhhhhhhhhhhh", price: 1, image_url: img_url)
 end
   test "image url ends with good values" do
     ok = %w{fred.jpg bla.Jpg FRED.JPG FRED.png FRED.PNG FRED.GIF http://a.b.c/x/y/z/fred.gif }
@@ -36,9 +36,14 @@ end
   end
   test 'product not valid without unique title ' do
     product = Product.new(title: products(:ruby).title,
-                          description:'kfjfas;lj',price:9.0,
+                          description:'kfjfdddddas;lj',price:9.0,
                           image_url:'bla.gif')
     assert product.invalid?
     assert_equal(['has already been taken'],product.errors[:title])
+  end
+  test 'description is longer than 10 chars' do
+    product = Product.new(title:"fafsd",description:'ddd',image_url:'hoss.png',price:9.0)
+    assert (product.invalid?)
+    assert_equal(['is too short (minimum is 10 characters)'],product.errors[:description])
   end
 end
