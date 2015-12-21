@@ -11,6 +11,10 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-ui/effect-blind
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+$(document).on "ready page:change", -> $('.store .entry > img').click -> $(this).parent().find(':submit').click()
